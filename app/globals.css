@@ -1,26 +1,195 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===== Google Fonts (loaded via <link> in layout.tsx metadata) ===== */
 
+/* ===== Tailwind v4 Theme: Design Tokens ===== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --- Colors: Material Design 3 Palette --- */
+  --color-primary: #af101a;
+  --color-primary-container: #d32f2f;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #fff2f0;
+  --color-on-primary-fixed: #410003;
+  --color-on-primary-fixed-variant: #930010;
+  --color-primary-fixed: #ffdad6;
+  --color-primary-fixed-dim: #ffb3ac;
+  --color-inverse-primary: #ffb3ac;
+
+  --color-secondary: #4c56af;
+  --color-secondary-container: #959efd;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #27308a;
+  --color-on-secondary-fixed: #000767;
+  --color-on-secondary-fixed-variant: #343d96;
+  --color-secondary-fixed: #e0e0ff;
+  --color-secondary-fixed-dim: #bdc2ff;
+
+  --color-tertiary: #455b65;
+  --color-tertiary-container: #5e737d;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-container: #e9f7ff;
+  --color-on-tertiary-fixed: #071e27;
+  --color-on-tertiary-fixed-variant: #354a53;
+  --color-tertiary-fixed: #cfe6f2;
+  --color-tertiary-fixed-dim: #b4cad6;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  --color-surface: #f9f9f9;
+  --color-surface-bright: #f9f9f9;
+  --color-surface-dim: #dadada;
+  --color-surface-variant: #e2e2e2;
+  --color-surface-tint: #ba1a20;
+  --color-surface-container: #eeeeee;
+  --color-surface-container-low: #f3f3f3;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container-highest: #e2e2e2;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-surface: #1a1c1c;
+  --color-on-surface-variant: #5b403d;
+  --color-inverse-surface: #2f3131;
+  --color-inverse-on-surface: #f1f1f1;
+
+  --color-outline: #8f6f6c;
+  --color-outline-variant: #e4beba;
+
+  --color-background: #f9f9f9;
+  --color-on-background: #1a1c1c;
+
+  /* --- Spacing --- */
+  --spacing-unit: 4px;
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+  --spacing-gutter: 24px;
+  --spacing-margin: 32px;
+  --spacing-container-max: 1280px;
+
+  /* --- Border Radius --- */
+  --radius: 0.125rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-full: 0.75rem;
+
+  /* --- Font Families --- */
+  --font-headline-xl: "Work Sans", sans-serif;
+  --font-headline-lg: "Work Sans", sans-serif;
+  --font-headline-md: "Work Sans", sans-serif;
+  --font-body-lg: "Inter", sans-serif;
+  --font-body-md: "Inter", sans-serif;
+  --font-body-sm: "Inter", sans-serif;
+  --font-label-caps: "Inter", sans-serif;
+  --font-tamil-headline: "Mukta Malar", sans-serif;
+  --font-tamil-body: "Mukta Malar", sans-serif;
+
+  /* --- Font Sizes --- */
+  --text-headline-xl: 48px;
+  --text-headline-xl--line-height: 56px;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-headline-xl--font-weight: 700;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 40px;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 32px;
+  --text-headline-md--font-weight: 600;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 28px;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 24px;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 14px;
+  --text-body-sm--line-height: 20px;
+  --text-body-sm--font-weight: 400;
+
+  --text-label-caps: 12px;
+  --text-label-caps--line-height: 16px;
+  --text-label-caps--letter-spacing: 0.05em;
+  --text-label-caps--font-weight: 700;
+
+  --text-tamil-headline: 32px;
+  --text-tamil-headline--line-height: 44px;
+  --text-tamil-headline--font-weight: 600;
+
+  --text-tamil-body: 18px;
+  --text-tamil-body--line-height: 30px;
+  --text-tamil-body--font-weight: 400;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===== Base Styles ===== */
+body {
+  font-family: "Inter", sans-serif;
+  background: var(--color-background);
+  color: var(--color-on-surface);
+}
+
+/* ===== Material Symbols Icon Font ===== */
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+/* ===== Breaking News Gradient ===== */
+.breaking-news-gradient {
+  background: linear-gradient(90deg, #af101a 0%, #1a237e 100%);
+}
+
+/* ===== Marquee Animation ===== */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* ===== Custom Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+/* ===== Form Floating Label Animation ===== */
+.form-input:focus + label,
+.form-input:not(:placeholder-shown) + label {
+  transform: translateY(-24px) scale(0.85);
+  color: #af101a;
+}
+
+.form-input + label {
+  transition: all 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+/* ===== Bento Grid ===== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+/* ===== Dark Mode Overrides ===== */
+.dark body {
+  background: #0a0a0a;
+  color: #ededed;
 }
