@@ -1,4 +1,5 @@
 interface NewsCardProps {
+  id?: string;
   image: string;
   category: string;
   categoryTamil: string;

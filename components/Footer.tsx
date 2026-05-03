@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const footerLinks = [
-  { label: "Instagram", href: "#" },
-  { label: "Facebook", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/aathirai527?igsh=MWJ5OTY3a3V3MG1ucg==*" },
+  { label: "Facebook", href: "https://www.facebook.com/share/17JgqtaNvJ/" },
   { label: "Privacy Policy", href: "#", underline: true },
   { label: "Terms of Service", href: "#", underline: true },
 ];
