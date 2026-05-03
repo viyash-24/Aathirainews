@@ -51,10 +51,10 @@ export default function ContactPage() {
                 />
                 <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
                   <p className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold uppercase">
-                    Main Bureau
+                    Hopton
                   </p>
                   <p className="font-[Inter] text-[16px] leading-[24px] font-bold">
-                    Chennai, Tamil Nadu
+                    Uva, Srilanka
                   </p>
                 </div>
               </div>
