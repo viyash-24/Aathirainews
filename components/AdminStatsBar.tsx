@@ -1,20 +1,33 @@
-interface StatItem {
-  label: string;
-  value: string;
-  color: string;
-}
+"use client";
 
-const stats: StatItem[] = [
-  { label: "Total Articles", value: "1,284", color: "text-blue-900" },
-  { label: "Published Today", value: "24", color: "text-primary" },
-  { label: "Drafts", value: "12", color: "text-tertiary" },
-  { label: "Avg. Engagement", value: "88%", color: "text-secondary" },
-];
+import { useEffect, useState } from "react";
+import { fetchAdminNews } from "@/lib/api";
 
-export default function AdminStatsBar() {
+export default function AdminStatsBar({ refreshKey = 0 }: { refreshKey?: number }) {
+  const [stats, setStats] = useState({ total: 0, published: 0, drafts: 0 });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAdminNews({ limit: 1 })
+      .then((res) => {
+        if (res.stats) {
+          setStats(res.stats);
+        }
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, [refreshKey]);
+
+  const statItems = [
+    { label: "Total Articles", value: loading ? "..." : stats.total, color: "text-blue-900" },
+    { label: "Published", value: loading ? "..." : stats.published, color: "text-primary" },
+    { label: "Drafts", value: loading ? "..." : stats.drafts, color: "text-tertiary" },
+    { label: "Avg. Engagement", value: loading ? "..." : "88%", color: "text-secondary" }, // Placeholder for engagement
+  ];
+
   return (
     <div className="col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
-      {stats.map((stat) => (
+      {statItems.map((stat) => (
         <div
           key={stat.label}
           className="bg-white p-4 border border-gray-200 flex flex-col gap-1"

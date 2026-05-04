@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import AdminStatsBar from "@/components/AdminStatsBar";
 import AdminNewsForm from "@/components/AdminNewsForm";
 import AdminArticlesTable from "@/components/AdminArticlesTable";
@@ -5,6 +8,9 @@ import CategoryInsights from "@/components/CategoryInsights";
 import AdminFooter from "@/components/AdminFooter";
 
 export default function AdminPage() {
+  // Incrementing this tells AdminArticlesTable to reload after a form save
+  const [refreshKey, setRefreshKey] = useState(0);
+
   return (
     <>
       <main className="p-6 max-w-[1280px]">
@@ -19,7 +25,12 @@ export default function AdminPage() {
             </p>
           </div>
           <div className="flex gap-4">
-            <button className="flex items-center gap-2 px-6 py-2 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-colors shadow-sm">
+            <button
+              className="flex items-center gap-2 px-6 py-2 bg-primary text-white font-bold rounded-lg hover:bg-primary-container transition-colors shadow-sm"
+              onClick={() => {
+                document.querySelector("form")?.scrollIntoView({ behavior: "smooth" });
+              }}
+            >
               <span className="material-symbols-outlined">add_circle</span>
               CREATE NEWS
             </button>
@@ -28,15 +39,15 @@ export default function AdminPage() {
 
         <div className="grid grid-cols-12 gap-6">
           {/* Quick Stats */}
-          <AdminStatsBar />
+          <AdminStatsBar refreshKey={refreshKey} />
 
-          {/* Create News Form */}
-          <AdminNewsForm />
+          {/* Create News Form — triggers table refresh on save */}
+          <AdminNewsForm onSaved={() => setRefreshKey((k) => k + 1)} />
 
           {/* Articles Table + Category Insights */}
-          <section className="col-span-12 lg:col-span-7 flex flex-col gap-4">
-            <AdminArticlesTable />
-            <CategoryInsights />
+          <section className="col-span-12 flex flex-col gap-4">
+            <AdminArticlesTable refreshKey={refreshKey} />
+            <CategoryInsights refreshKey={refreshKey} />
           </section>
         </div>
       </main>

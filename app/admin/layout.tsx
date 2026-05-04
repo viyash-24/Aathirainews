@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import AdminSidebar from "@/components/AdminSidebar";
+import AdminLayoutWrapper from "@/components/AdminLayoutWrapper";
 
 export const metadata: Metadata = {
   title: "AathiraiNews Admin Dashboard",
@@ -12,10 +12,5 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="flex min-h-screen">
-      <AdminSidebar />
-      <div className="flex-1 ml-64">{children}</div>
-    </div>
-  );
+  return <AdminLayoutWrapper>{children}</AdminLayoutWrapper>;
 }

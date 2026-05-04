@@ -64,7 +64,7 @@ export default function ContactPage() {
                   Direct Support
                 </h4>
                 <p className="font-[Inter] text-[18px] leading-[28px] text-blue-900 font-bold underline decoration-red-700 underline-offset-4">
-                  support@aathirainews.com
+                  newsaathirai@gmail.com
                 </p>
                 <p className="font-[Mukta_Malar] text-[18px] leading-[30px] text-tertiary mt-2">
                   நேரடி உதவிக்கு மின்னஞ்சல் செய்யவும்

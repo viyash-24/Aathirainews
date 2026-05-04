@@ -13,9 +13,10 @@ export interface NewsArticle {
   _id: string;
   titleEn: string;
   titleTa: string;
-  content: string;
+  contentEn: string;
+  contentTa: string;
   category: string;
-  language: "tamil" | "english" | "bilingual";
+  newsLanguage: "tamil" | "english" | "bilingual";
   image: string;
   author: string;
   isPublished: boolean;
@@ -42,7 +43,7 @@ export interface NewsListResponse {
 /** Helper: attach Bearer token if present in localStorage */
 function authHeader(): Record<string, string> {
   if (typeof window === "undefined") return {};
-  const token = localStorage.getItem("aathirai_token");
+  const token = localStorage.getItem("aathirai_token") ?? localStorage.getItem("token");
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
@@ -50,14 +51,14 @@ function authHeader(): Record<string, string> {
 
 export async function fetchPublishedNews(params?: {
   category?: string;
-  language?: string;
+  newsLanguage?: string;
   search?: string;
   page?: number;
   limit?: number;
 }): Promise<NewsListResponse> {
   const qs = new URLSearchParams();
   if (params?.category) qs.set("category", params.category);
-  if (params?.language) qs.set("language", params.language);
+  if (params?.newsLanguage) qs.set("language", params.newsLanguage);
   if (params?.search) qs.set("search", params.search);
   if (params?.page) qs.set("page", String(params.page));
   if (params?.limit) qs.set("limit", String(params.limit));
@@ -96,7 +97,13 @@ export async function fetchAdminNews(params?: {
     headers: authHeader(),
     cache: "no-store",
   });
-  if (!res.ok) throw new Error("Failed to fetch admin news");
+  if (!res.ok) {
+    const errorJson = await res.json().catch(() => null);
+    if (res.status === 401) {
+      throw new Error("Unauthorized: Please log in as admin.");
+    }
+    throw new Error(errorJson?.error || errorJson?.message || `Failed to fetch admin news (${res.status})`);
+  }
   return res.json();
 }
 
@@ -185,4 +192,79 @@ export function formatDate(dateStr: string): string {
     hour: "numeric",
     minute: "2-digit",
   });
+}
+
+// ── Categories ────────────────────────────────────────────────
+
+export interface CategoryData {
+  _id: string;
+  name: string;
+  nameTa: string;
+  slug: string;
+  color: string;
+  status: "Active" | "Inactive";
+}
+
+export async function fetchCategories(): Promise<{ success: boolean; data: CategoryData[] }> {
+  const res = await fetch(`${BASE}/categories`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch categories");
+  return res.json();
+}
+
+export async function createCategory(body: Partial<CategoryData>): Promise<CategoryData> {
+  const res = await fetch(`${BASE}/categories`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Failed to create category");
+  return json.data;
+}
+
+export async function updateCategory(id: string, body: Partial<CategoryData>): Promise<CategoryData> {
+  const res = await fetch(`${BASE}/categories/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Failed to update category");
+  return json.data;
+}
+
+export async function deleteCategory(id: string): Promise<void> {
+  const res = await fetch(`${BASE}/categories/${id}`, {
+    method: "DELETE",
+    headers: authHeader(),
+  });
+  if (!res.ok) throw new Error("Failed to delete category");
+}
+
+// ── Settings ──────────────────────────────────────────────────
+
+export interface SiteSettings {
+  siteName: string;
+  tagline: string;
+  contactEmail: string;
+  articlesPerPage: string;
+  breakingNewsText: string;
+  googleAnalyticsId: string;
+}
+
+export async function fetchSettings(): Promise<{ success: boolean; data: SiteSettings }> {
+  const res = await fetch(`${BASE}/settings`, { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch settings");
+  return res.json();
+}
+
+export async function updateSettings(body: Partial<SiteSettings>): Promise<SiteSettings> {
+  const res = await fetch(`${BASE}/settings`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.error || "Failed to update settings");
+  return json.data;
 }
