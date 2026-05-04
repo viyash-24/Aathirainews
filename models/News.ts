@@ -12,9 +12,10 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export interface INews extends Document {
   titleEn: string;          // English headline
   titleTa: string;          // Tamil headline (தமிழ் தலைப்பு)
-  content: string;          // Article body (bilingual)
+  contentEn: string;
+  contentTa: string;
   category: string;         // e.g. Politics, Technology, Sports
-  language: "tamil" | "english" | "bilingual";
+  newsLanguage: "tamil" | "english" | "bilingual";
   image: string;            // Featured image URL
   author: string;           // Author name
   isPublished: boolean;     // Controls public visibility
@@ -38,9 +39,25 @@ const NewsSchema: Schema<INews> = new Schema(
       trim: true,
       maxlength: [300, "Title cannot exceed 300 characters"],
     },
-    content: {
+    contentEn: {
       type: String,
-      required: [true, "Article content is required"],
+      required: [
+        function (this: any) {
+          return this.newsLanguage === "english" || this.newsLanguage === "bilingual";
+        },
+        "English content is required",
+      ],
+      default: "",
+    },
+    contentTa: {
+      type: String,
+      required: [
+        function (this: any) {
+          return this.newsLanguage === "tamil" || this.newsLanguage === "bilingual";
+        },
+        "Tamil content is required",
+      ],
+      default: "",
     },
     category: {
       type: String,
@@ -62,7 +79,7 @@ const NewsSchema: Schema<INews> = new Schema(
       },
       default: "Other",
     },
-    language: {
+    newsLanguage: {
       type: String,
       enum: ["tamil", "english", "bilingual"],
       default: "bilingual",
@@ -86,18 +103,23 @@ const NewsSchema: Schema<INews> = new Schema(
     },
   },
   {
-    timestamps: true, // Auto-manages createdAt & updatedAt
+    timestamps: true,
+    language_override: "dummy_language_field",
   }
 );
 
 // ─── Indexes for Query Performance ────────────────────────────
 NewsSchema.index({ isPublished: 1, createdAt: -1 }); // Public feed queries
 NewsSchema.index({ category: 1 });                    // Category filters
-NewsSchema.index({ titleEn: "text", titleTa: "text", content: "text" }); // Full-text search
+NewsSchema.index(
+  { titleEn: "text", titleTa: "text", contentEn: "text", contentTa: "text" },
+  { default_language: "none", language_override: "dummy_language_field" }
+); // Full-text search
 
 // ─── Model Export ──────────────────────────────────────────────
-// Prevent re-compilation during hot-reloads in development
-const News: Model<INews> =
-  mongoose.models.News || mongoose.model<INews>("News", NewsSchema);
+if (mongoose.models.News) {
+  delete mongoose.models.News;
+}
+const News: Model<INews> = mongoose.model<INews>("News", NewsSchema);
 
 export default News;
