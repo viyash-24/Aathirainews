@@ -64,6 +64,17 @@ export default function AdminSidebar() {
             Selva Kumar
           </p>
           <p className="text-[10px] text-slate-500">Editor-in-Chief</p>
+          <button 
+            type="button"
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("user");
+              window.location.href = "/admin/login";
+            }}
+            className="text-[10px] font-bold text-red-600 hover:underline cursor-pointer mt-1 text-left"
+          >
+            Logout
+          </button>
         </div>
       </div>
     </aside>
