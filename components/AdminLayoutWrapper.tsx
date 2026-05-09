@@ -53,7 +53,7 @@ export default function AdminLayoutWrapper({
           if (isLoginPage) {
             if (!didRedirectRef.current) {
               didRedirectRef.current = true;
-              router.replace("/admin");
+              router.replace("/admin/dashboard");
             }
           } else {
             setIsLoading(false);
