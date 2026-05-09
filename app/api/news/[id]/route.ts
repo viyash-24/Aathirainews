@@ -12,6 +12,13 @@ import connectDB from "@/lib/db";
 import News from "@/models/News";
 import { requireAdmin } from "@/lib/auth";
 import mongoose from "mongoose";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // Force dynamic rendering
 export const dynamic = "force-dynamic";
@@ -108,6 +115,8 @@ export async function PUT(
     delete body._id;
     delete body.createdAt;
 
+    const existingNews = await News.findById(id).lean();
+
     const updatedNews = await News.findByIdAndUpdate(
       id,
       { ...body, updatedAt: new Date() },
@@ -117,11 +126,31 @@ export async function PUT(
       }
     ).lean();
 
-    if (!updatedNews) {
+    if (!updatedNews || !existingNews) {
       return Response.json(
         { success: false, error: "Article not found" },
         { status: 404 }
       );
+    }
+
+    // Attempt to delete old image if it was replaced
+    if (
+      existingNews.image &&
+      body.image &&
+      existingNews.image !== body.image &&
+      existingNews.image.includes("cloudinary.com")
+    ) {
+      try {
+        const parts = existingNews.image.split("/");
+        const folderIndex = parts.indexOf("upload") + 2; 
+        if (folderIndex < parts.length) {
+          const publicIdWithExt = parts.slice(folderIndex).join("/");
+          const publicId = publicIdWithExt.substring(0, publicIdWithExt.lastIndexOf(".")) || publicIdWithExt;
+          await cloudinary.uploader.destroy(publicId);
+        }
+      } catch (cloudErr) {
+        console.error("Cloudinary delete old image error:", cloudErr);
+      }
     }
 
     return Response.json({
@@ -183,6 +212,21 @@ export async function DELETE(
         { success: false, error: "Article not found" },
         { status: 404 }
       );
+    }
+
+    // Try to delete image from Cloudinary
+    if (deletedNews.image && deletedNews.image.includes("cloudinary.com")) {
+      try {
+        const parts = deletedNews.image.split("/");
+        const folderIndex = parts.indexOf("upload") + 2; 
+        if (folderIndex < parts.length) {
+          const publicIdWithExt = parts.slice(folderIndex).join("/");
+          const publicId = publicIdWithExt.substring(0, publicIdWithExt.lastIndexOf(".")) || publicIdWithExt;
+          await cloudinary.uploader.destroy(publicId);
+        }
+      } catch (cloudErr) {
+        console.error("Cloudinary delete error:", cloudErr);
+      }
     }
 
     return Response.json({
