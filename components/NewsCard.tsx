@@ -43,7 +43,7 @@ export default function NewsCard({
           </span>
           <span className="text-[10px] text-slate-500">{timeAgo}</span>
         </div>
-        <h3 className="font-[Mukta_Malar] text-[24px] leading-[32px] font-semibold leading-tight group-hover:text-primary transition-colors">
+        <h3 className="text-slate-900 dark:text-white font-[Mukta_Malar] text-[24px] leading-[32px] font-semibold group-hover:text-primary transition-colors">
           {title}
         </h3>
         <p className="font-[Inter] text-[14px] leading-[20px] text-slate-600 dark:text-slate-400 line-clamp-3">

@@ -117,7 +117,7 @@ export default function HeroSection() {
               <Link
                 key={article._id}
                 href={`/news/${article._id}`}
-                className="flex-1 bg-white dark:bg-slate-900 border border-outline-variant p-4 flex gap-4 hover:bg-surface transition-colors cursor-pointer"
+                className="flex-1 group bg-white dark:bg-slate-900 border border-outline-variant p-4 flex gap-4 hover:bg-surface transition-colors cursor-pointer"
               >
                 <div className="w-1/3 shrink-0">
                   {article.image ? (
@@ -138,7 +138,7 @@ export default function HeroSection() {
                   <span className="font-[Inter] text-[10px] font-bold text-primary uppercase tracking-wider">
                     {article.category}
                   </span>
-                  <h3 className="font-[Mukta_Malar] text-[15px] leading-[22px] font-bold mt-1 line-clamp-3">
+                  <h3 className="text-slate-900 dark:text-white dark:group-hover:text-slate-900 font-[Mukta_Malar] text-[15px] leading-[22px] font-bold mt-1 line-clamp-3">
                     {article.titleTa || article.titleEn}
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">{timeAgo(article.createdAt)}</p>
