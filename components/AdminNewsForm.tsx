@@ -7,7 +7,7 @@ interface FormData {
   titleEn: string;
   titleTa: string;
   category: string;
-  language: "bilingual" | "english" | "tamil";
+  language: "english" | "tamil";
   contentEn: string;
   contentTa: string;
   image: string;
@@ -37,7 +37,7 @@ export default function AdminNewsForm({ onSaved }: Props) {
     titleEn: "",
     titleTa: "",
     category: "Politics",
-    language: "bilingual",
+    language: "english",
     contentEn: "",
     contentTa: "",
     image: "",
@@ -56,10 +56,10 @@ export default function AdminNewsForm({ onSaved }: Props) {
     const e: Partial<FormData> = {};
     if (!form.titleEn.trim()) e.titleEn = "English title is required";
     if (!form.titleTa.trim()) e.titleTa = "Tamil title is required";
-    if ((form.language === "english" || form.language === "bilingual") && !form.contentEn.trim()) {
+    if (form.language === "english" && !form.contentEn.trim()) {
       e.contentEn = "English content is required";
     }
-    if ((form.language === "tamil" || form.language === "bilingual") && !form.contentTa.trim()) {
+    if (form.language === "tamil" && !form.contentTa.trim()) {
       e.contentTa = "Tamil content is required";
     }
     setErrors(e);
@@ -69,7 +69,7 @@ export default function AdminNewsForm({ onSaved }: Props) {
   const reset = () =>
     setForm({
       titleEn: "", titleTa: "", category: categories.length > 0 ? categories[0].name : "Politics",
-      language: "bilingual", contentEn: "", contentTa: "", image: "", author: "", publishDate: "",
+      language: "english", contentEn: "", contentTa: "", image: "", author: "", publishDate: "",
     });
 
   const submit = async (publish: boolean) => {
@@ -219,7 +219,6 @@ export default function AdminNewsForm({ onSaved }: Props) {
               disabled={isBusy}
               onChange={(e) => set("language", e.target.value as FormData["language"])}
             >
-              <option value="bilingual">Bilingual</option>
               <option value="english">English</option>
               <option value="tamil">Tamil</option>
             </select>
@@ -291,7 +290,7 @@ export default function AdminNewsForm({ onSaved }: Props) {
           )}
         </div>
 
-        {(form.language === "english" || form.language === "bilingual") && (
+        {form.language === "english" && (
           <div className="flex flex-col gap-1">
             <label className="font-[Inter] text-[12px] font-bold text-slate-600 uppercase tracking-wider">
               English Content *
@@ -308,7 +307,7 @@ export default function AdminNewsForm({ onSaved }: Props) {
           </div>
         )}
 
-        {(form.language === "tamil" || form.language === "bilingual") && (
+        {form.language === "tamil" && (
           <div className="flex flex-col gap-1">
             <label className="font-[Inter] text-[12px] font-bold text-slate-600 uppercase tracking-wider">
               Tamil Content *

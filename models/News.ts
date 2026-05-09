@@ -20,6 +20,8 @@ export interface INews extends Document {
   author: string;           // Author name
   isPublished: boolean;     // Controls public visibility
   publishDate: Date | null; // Scheduled publish date
+  views: number;            // Number of times the article was viewed
+  commentsCount: number;    // Number of comments on the article
   createdAt: Date;
   updatedAt: Date;
 }
@@ -100,6 +102,14 @@ const NewsSchema: Schema<INews> = new Schema(
     publishDate: {
       type: Date,
       default: null,
+    },
+    views: {
+      type: Number,
+      default: 0,
+    },
+    commentsCount: {
+      type: Number,
+      default: 0,
     },
   },
   {

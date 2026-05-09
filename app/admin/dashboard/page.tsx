@@ -10,14 +10,20 @@ export default function DashboardPage() {
   const [period, setPeriod] = useState<"today" | "week" | "month">("week");
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState<NewsArticle[]>([]);
-  const [stats, setStats] = useState({ total: 0, published: 0, drafts: 0 });
+  const [stats, setStats] = useState({ total: 0, published: 0, drafts: 0, totalViews: 0, totalComments: 0 });
 
   useEffect(() => {
     fetchAdminNews({ limit: 100 })
       .then((res) => {
         setArticles(res.data);
         if (res.stats) {
-          setStats(res.stats);
+          setStats({
+            total: res.stats.total,
+            published: res.stats.published,
+            drafts: res.stats.drafts,
+            totalViews: res.stats.totalViews || 0,
+            totalComments: res.stats.totalComments || 0,
+          });
         }
       })
       .catch((err) => console.error(err))
@@ -55,12 +61,12 @@ export default function DashboardPage() {
   }));
 
   const statCards = [
-    { label: "Total Articles", value: loading ? "..." : stats.total, change: "+3 this week", up: true, icon: "article", color: "text-blue-900", bg: "bg-blue-50" },
-    { label: "Published", value: loading ? "..." : stats.published, change: "+2 vs yesterday", up: true, icon: "publish", color: "text-primary", bg: "bg-red-50" },
-    { label: "Drafts", value: loading ? "..." : stats.drafts, change: "-1 vs yesterday", up: false, icon: "draft", color: "text-amber-600", bg: "bg-amber-50" },
+    { label: "Total Articles", value: loading ? "..." : stats.total, change: "overall", up: true, icon: "article", color: "text-blue-900", bg: "bg-blue-50" },
+    { label: "Published", value: loading ? "..." : stats.published, change: "overall", up: true, icon: "publish", color: "text-primary", bg: "bg-red-50" },
+    { label: "Drafts", value: loading ? "..." : stats.drafts, change: "overall", up: false, icon: "draft", color: "text-amber-600", bg: "bg-amber-50" },
     { label: "Avg. Engagement", value: "88%", change: "+4% this month", up: true, icon: "bar_chart", color: "text-secondary", bg: "bg-indigo-50" },
-    { label: "Total Views", value: "2.4M", change: "+12% this month", up: true, icon: "visibility", color: "text-emerald-700", bg: "bg-emerald-50" },
-    { label: "Comments", value: "3,891", change: "+142 today", up: true, icon: "comment", color: "text-purple-700", bg: "bg-purple-50" },
+    { label: "Total Views", value: loading ? "..." : stats.totalViews.toLocaleString(), change: "overall", up: true, icon: "visibility", color: "text-emerald-700", bg: "bg-emerald-50" },
+    { label: "Comments", value: loading ? "..." : stats.totalComments.toLocaleString(), change: "overall", up: true, icon: "comment", color: "text-purple-700", bg: "bg-purple-50" },
   ];
 
   return (

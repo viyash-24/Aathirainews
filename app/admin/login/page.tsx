@@ -37,7 +37,7 @@ export default function AdminLogin() {
         }
 
         // Redirect to admin dashboard
-        router.replace("/admin");
+        router.replace("/admin/dashboard");
       } else {
         setError(data.error || "Login failed");
       }

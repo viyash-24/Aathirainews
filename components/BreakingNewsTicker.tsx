@@ -17,7 +17,7 @@ export default function BreakingNewsTicker() {
 
   const ticker =
     titles.length > 0
-      ? titles.join("  ·  ")
+      ? titles.join("                 ✦               ")
       : "AathiraiNews — உங்கள் நம்பகமான செய்தி மூலம்";
 
   return (

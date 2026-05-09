@@ -65,7 +65,7 @@ export async function GET(request: NextRequest) {
 
     const skip = (page - 1) * limit;
 
-    const [news, total, publishedCount, draftCount] = await Promise.all([
+    const [news, total, publishedCount, draftCount, aggregations] = await Promise.all([
       News.find(query)
         .sort({ createdAt: -1 })
         .skip(skip)
@@ -74,7 +74,19 @@ export async function GET(request: NextRequest) {
       News.countDocuments(query),
       News.countDocuments({ isPublished: true }),
       News.countDocuments({ isPublished: false }),
+      News.aggregate([
+        {
+          $group: {
+            _id: null,
+            totalViews: { $sum: "$views" },
+            totalComments: { $sum: "$commentsCount" }
+          }
+        }
+      ]),
     ]);
+
+    const totalViews = aggregations[0]?.totalViews || 0;
+    const totalComments = aggregations[0]?.totalComments || 0;
 
     return Response.json({
       success: true,
@@ -83,6 +95,8 @@ export async function GET(request: NextRequest) {
         total: publishedCount + draftCount,
         published: publishedCount,
         drafts: draftCount,
+        totalViews,
+        totalComments
       },
       pagination: {
         page,

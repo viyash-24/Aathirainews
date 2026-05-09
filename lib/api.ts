@@ -21,6 +21,8 @@ export interface NewsArticle {
   author: string;
   isPublished: boolean;
   publishDate: string | null;
+  views: number;
+  commentsCount: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -37,7 +39,7 @@ export interface NewsListResponse {
   success: boolean;
   data: NewsArticle[];
   pagination: Pagination;
-  stats?: { total: number; published: number; drafts: number };
+  stats?: { total: number; published: number; drafts: number; totalViews: number; totalComments: number };
 }
 
 /** Helper: attach Bearer token if present in localStorage */
