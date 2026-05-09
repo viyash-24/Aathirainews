@@ -1,7 +1,11 @@
 import { NextRequest } from "next/server";
-import path from "path";
-import { promises as fs } from "fs";
-import crypto from "crypto";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export const dynamic = "force-dynamic";
 
@@ -27,19 +31,20 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    const ext = path.extname(file.name) || ".png";
-    const safeExt = ext.toLowerCase().slice(0, 10);
-    const filename = `${crypto.randomBytes(16).toString("hex")}${safeExt}`;
-
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await fs.mkdir(uploadDir, { recursive: true });
-
-    const fullPath = path.join(uploadDir, filename);
-    await fs.writeFile(fullPath, buffer);
+    const uploadResult = await new Promise((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_stream(
+        { folder: "aathirainews" },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+      uploadStream.end(buffer);
+    });
 
     return Response.json({
       success: true,
-      url: `/uploads/${filename}`,
+      url: (uploadResult as any).secure_url,
     });
   } catch (error) {
     console.error("POST /api/upload error:", error);
