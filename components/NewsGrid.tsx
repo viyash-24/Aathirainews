@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import NewsCard from "./NewsCard";
-import { fetchPublishedNews, fetchCategories, type NewsArticle, type CategoryData, timeAgo } from "@/lib/api";
+import { fetchPublishedNews, type NewsArticle, type CategoryData, timeAgo } from "@/lib/api";
 
-export default function NewsGrid() {
-  const [articles, setArticles] = useState<NewsArticle[]>([]);
-  const [categories, setCategories] = useState<CategoryData[]>([]);
-  const [loading, setLoading] = useState(true);
+interface NewsGridProps {
+  initialArticles?: any[];
+  initialCategories?: any[];
+}
+
+export default function NewsGrid({ initialArticles = [], initialCategories = [] }: NewsGridProps) {
+  const [articles, setArticles] = useState<any[]>(initialArticles);
+  const [categories, setCategories] = useState<any[]>(initialCategories);
+  const [loading, setLoading] = useState(false);
   const [activeFilter, setActiveFilter] = useState("ALL");
-
-  useEffect(() => {
-    fetchCategories()
-      .then(res => setCategories(res.data.filter(c => c.status === "Active")))
-      .catch(err => console.error(err));
-  }, []);
+  const isFirstRender = useRef(true);
 
   const load = useCallback(async (category: string) => {
     setLoading(true);
@@ -32,6 +32,10 @@ export default function NewsGrid() {
   }, []);
 
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     load(activeFilter);
   }, [activeFilter, load]);
 

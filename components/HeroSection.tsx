@@ -1,48 +1,28 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { fetchPublishedNews, type NewsArticle, timeAgo } from "@/lib/api";
+import Image from "next/image";
+import { type NewsArticle, timeAgo } from "@/lib/api";
+import connectDB from "@/lib/db";
+import News from "@/models/News";
 
-export default function HeroSection() {
-  const [articles, setArticles] = useState<NewsArticle[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchPublishedNews({ limit: 4 })
-      .then((res) => setArticles(res.data))
-      .catch(() => setArticles([]))
-      .finally(() => setLoading(false));
-  }, []);
+export default async function HeroSection() {
+  await connectDB();
+  const rawArticles = await News.find({ isPublished: true })
+    .sort({ createdAt: -1 })
+    .limit(4)
+    .lean();
+  
+  const articles: any[] = rawArticles.map((a: any) => ({
+    ...a,
+    _id: a._id.toString(),
+    createdAt: a.createdAt.toISOString(),
+    updatedAt: a.updatedAt.toISOString(),
+  }));
 
   const hero = articles[0];
   const sidebar = articles.slice(1, 4);
 
   const heroSnippetBase =
     hero?.newsLanguage === "tamil" ? hero.contentTa : hero?.contentEn;
-
-  /* ── Loading state ─────────────────────────────────────────── */
-  if (loading) {
-    return (
-      <section className="max-w-[1280px] mx-auto px-6 py-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-pulse">
-          <div className="lg:col-span-8 aspect-video bg-slate-200" />
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex-1 flex gap-4 p-4 border border-slate-100">
-                <div className="w-1/3 aspect-square bg-slate-200" />
-                <div className="w-2/3 flex flex-col gap-2 pt-1">
-                  <div className="h-3 bg-slate-200 rounded w-1/2" />
-                  <div className="h-4 bg-slate-200 rounded w-full" />
-                  <div className="h-4 bg-slate-200 rounded w-4/5" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   /* ── Empty state (no published news yet) ────────────────────── */
   if (!hero) {
@@ -71,10 +51,13 @@ export default function HeroSection() {
         <div className="lg:col-span-8 relative group overflow-hidden border border-outline-variant bg-white dark:bg-slate-900">
           <div className="aspect-video relative overflow-hidden">
             {hero.image ? (
-              <img
+              <Image
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 src={hero.image}
-                alt={hero.titleEn}
+                alt={hero.titleEn || "Hero Image"}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 66vw"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-blue-900 to-indigo-900 flex items-center justify-center">
@@ -119,12 +102,14 @@ export default function HeroSection() {
                 href={`/news/${article._id}`}
                 className="flex-1 group bg-white dark:bg-slate-900 border border-outline-variant p-4 flex gap-4 hover:bg-surface transition-colors cursor-pointer"
               >
-                <div className="w-1/3 shrink-0">
+                <div className="w-1/3 shrink-0 relative aspect-square overflow-hidden">
                   {article.image ? (
-                    <img
-                      className="w-full aspect-square object-cover"
+                    <Image
+                      className="w-full h-full object-cover"
                       src={article.image}
-                      alt={article.titleEn}
+                      alt={article.titleEn || "Article Image"}
+                      fill
+                      sizes="(max-width: 1024px) 33vw, 15vw"
                     />
                   ) : (
                     <div className="w-full aspect-square bg-slate-100 flex items-center justify-center">
