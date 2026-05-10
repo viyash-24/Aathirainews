@@ -1,19 +1,15 @@
-"use client";
+import connectDB from "@/lib/db";
+import News from "@/models/News";
 
-import { useEffect, useState } from "react";
-import { fetchPublishedNews, type NewsArticle } from "@/lib/api";
+export default async function BreakingNewsTicker() {
+  await connectDB();
+  const articles = await News.find({ isPublished: true })
+    .sort({ createdAt: -1 })
+    .limit(8)
+    .select("titleTa titleEn")
+    .lean();
 
-export default function BreakingNewsTicker() {
-  const [titles, setTitles] = useState<string[]>([]);
-
-  useEffect(() => {
-    fetchPublishedNews({ limit: 8 })
-      .then((res) => {
-        const t = res.data.map((a) => a.titleTa || a.titleEn);
-        setTitles(t);
-      })
-      .catch(() => setTitles([]));
-  }, []);
+  const titles = articles.map((a: any) => a.titleTa || a.titleEn);
 
   const ticker =
     titles.length > 0
@@ -29,7 +25,7 @@ export default function BreakingNewsTicker() {
         <div className="overflow-hidden w-full">
           <div
             className="animate-marquee whitespace-nowrap font-[Mukta_Malar] text-[18px] leading-[30px]"
-            key={ticker} /* re-trigger animation when content changes */
+            key={ticker}
           >
             {ticker}
           </div>

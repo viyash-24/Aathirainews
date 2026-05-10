@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface NewsCardProps {
   id?: string;
@@ -21,12 +22,14 @@ export default function NewsCard({
 }: NewsCardProps) {
   return (
     <article className="bg-white dark:bg-slate-900 border border-outline-variant hover:shadow-sm transition-all group">
-      <div className="aspect-[16/9] overflow-hidden">
+      <div className="aspect-[16/9] overflow-hidden relative">
         {image ? (
-          <img
+          <Image
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             src={image}
-            alt={title}
+            alt={title || "News Image"}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div className="w-full h-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center">
