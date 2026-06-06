@@ -66,7 +66,7 @@ export default function AboutPage() {
             <img
               alt="Newsroom atmosphere"
               className="w-full h-full object-cover"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJpvCElAL13PnvOJk7saNEkdLLIH83hmlNKhtZ8j80K0eTL30hDBWEHwetrWnUaRuI2genn7g2ThDQMBw7NyUiv-6v5tHTYCbHAut_0jK6ll5B586eEjiI31wyXzAXatUJwXZdJasoychvJIDaQy5GSkUIvDYBsy5ej6s0pUnQkhJO42NoF0V0PUgAhOr0DrwA_mLn-xt15WpEqiLgA1phsI-6wm0HuZmi8r4WNQn7A9JlAdzEg14oOQfQVKDUYPDysFE3a5x17c8"
+              src="/aathirai_logo.jpeg"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-12">
               <div className="max-w-3xl">

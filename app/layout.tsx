@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "AathiraiNews delivers unfiltered, accurate, and rapid news to the Tamil-speaking global community. உலகெங்கிலும் வாழும் தமிழ் மக்களுக்குத் துல்லியமான செய்திகள்.",
   keywords: ["Tamil news", "AathiraiNews", "செய்திகள்", "தமிழ் செய்திகள்"],
+  icons: {
+    icon: "/aathirai_logo.jpeg",
+  },
 };
 
 export default function RootLayout({
