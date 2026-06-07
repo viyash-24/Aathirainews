@@ -2,34 +2,14 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import StatCard from "@/components/StatCard";
-import TimelineItem from "@/components/TimelineItem";
+import ContactForm from "@/components/ContactForm";
+import SocialCard from "@/components/SocialCard";
 
 export const metadata: Metadata = {
   title: "About Us | AathiraiNews",
   description:
     "Learn about AathiraiNews - our mission, history, and commitment to journalistic integrity for the Tamil-speaking global community.",
 };
-
-const timelineData = [
-  {
-    year: "2010",
-    title: "The Inception",
-    description:
-      "Founded as a local independent news bulletin in Chennai with a team of five dedicated journalists.",
-  },
-  {
-    year: "2015",
-    title: "Digital Transformation",
-    description:
-      "Launched our first bilingual mobile application, reaching the Tamil diaspora in Singapore and Canada.",
-  },
-  {
-    year: "2024",
-    title: "The Modern Era",
-    description:
-      "Now a multi-platform media house utilizing AI for hyper-local reporting and investigative journalism.",
-  },
-];
 
 const stats = [
   {
@@ -60,30 +40,6 @@ export default function AboutPage() {
     <>
       <Navbar />
       <main className="pt-24 pb-20">
-        {/* Hero Section */}
-        <section className="max-w-[1280px] mx-auto px-6 mb-16">
-          <div className="relative w-full h-[250px] sm:h-[350px] md:h-[500px] overflow-hidden rounded-xl">
-            <img
-              alt="Newsroom atmosphere"
-              className="w-full h-full object-cover"
-              src="/aathirai_logo.jpeg"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6 sm:p-8 md:p-12">
-              <div className="max-w-3xl">
-                <span className="bg-primary text-white font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold px-4 py-1 mb-4 inline-block uppercase tracking-widest">
-                  Our Legacy
-                </span>
-                <h1 className="font-['Work_Sans'] text-[28px] sm:text-[36px] md:text-[48px] leading-[34px] sm:leading-[44px] md:leading-[56px] tracking-[-0.02em] font-bold text-white mb-2 sm:mb-4">
-                  Integrity in Every Ink, Precision in Every Pixel.
-                </h1>
-                <p className="font-[Mukta_Malar] text-[20px] sm:text-[26px] md:text-[32px] leading-[28px] sm:leading-[36px] md:leading-[44px] font-semibold text-white">
-                  உண்மை, நேர்மை, வேகம் - ஆதிரை செய்திகளின் அடையாளம்.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Mission & Philosophy Bento Grid */}
         <section className="max-w-[1280px] mx-auto px-4 sm:px-6 mb-12 sm:mb-24">
           <div className="bento-grid">
@@ -108,12 +64,12 @@ export default function AboutPage() {
               </p>
             </div>
 
-            {/* History Image */}
+            {/* Official Logo Image */}
             <div className="col-span-12 md:col-span-5 h-[250px] sm:h-[300px] md:h-auto rounded-xl overflow-hidden relative border border-surface-container-highest">
               <img
-                alt="Printing press"
+                alt="AathiraiNews Official Logo"
                 className="w-full h-full object-cover"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9kwkDhIbZn2TFYWSrfnVQLh_6RK7Dj43MprGUINUlFNUCEQ-MOB8kLHYvlG-TXcPreQOFSL6l4i252SgdjfHXQn8uV9oDTeZfQA2spWMlj2aa6lC84IMmN0z-9TWZX9jw5_8u0Zy74-RVks0hvDAM8U5RqHoh2kZ1mjv0wf9YNoD18tPDuh6RPWCcCRu0yCOkNmbF5xQuh9wzGNpC6fRtquxFFs-vb5VlLk-rrIqeh-Doh8WtxVQIVHU3sm2bhPB-nA3wqpxaTD4"
+                src="/aathirai_logo.jpeg"
               />
             </div>
 
@@ -124,29 +80,8 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* History Timeline */}
-        <section className="bg-surface-container-lowest py-24">
-          <div className="max-w-[1280px] mx-auto px-6">
-            <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-              <div className="md:w-1/3">
-                <h2 className="font-['Work_Sans'] text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-blue-900 mb-4 sticky top-24">
-                  The Journey So Far
-                </h2>
-                <p className="font-[Mukta_Malar] text-[18px] leading-[30px] text-slate-600">
-                  எங்கள் வளர்ச்சி - ஓர் வரலாற்றுப் பார்வை.
-                </p>
-              </div>
-              <div className="md:w-2/3 border-l-2 border-outline-variant pl-8 sm:pl-12 space-y-10 sm:space-y-16">
-                {timelineData.map((item, index) => (
-                  <TimelineItem key={index} {...item} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Bilingual CTA */}
-        <section className="max-w-[1280px] mx-auto px-6 mt-24">
+        <section className="max-w-[1280px] mx-auto px-6 mb-16 sm:mb-24">
           <div className="bg-blue-900 text-white rounded-xl p-6 sm:p-8 md:p-12 text-center overflow-hidden relative">
             <div className="relative z-10">
               <h2 className="font-['Work_Sans'] text-[24px] sm:text-[32px] leading-[32px] sm:leading-[40px] tracking-[-0.01em] font-bold mb-4">
@@ -167,6 +102,71 @@ export default function AboutPage() {
             {/* Abstract BG Pattern */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-700/10 rounded-full -ml-48 -mb-48"></div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="max-w-[1280px] mx-auto px-4 sm:px-6 pt-8 border-t border-surface-container-highest">
+          {/* Contact Header */}
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
+            <div className="md:col-span-8">
+              <h2 className="font-['Work_Sans'] text-[28px] sm:text-[36px] md:text-[48px] leading-[36px] sm:leading-[44px] md:leading-[56px] tracking-[-0.02em] font-bold text-primary mb-3 sm:mb-4">
+                Connect With Us
+              </h2>
+              <h3 className="font-[Mukta_Malar] text-[22px] sm:text-[28px] md:text-[32px] leading-[32px] sm:leading-[38px] md:leading-[44px] font-semibold mb-3 sm:mb-4">
+                எங்களைத் தொடர்பு கொள்ளவும்
+              </h3>
+              <p className="font-[Inter] text-[15px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-tertiary max-w-2xl">
+                Whether you have a news tip, a correction, or just want to share
+                your thoughts, our editorial team is ready to listen.
+                உங்களிடம் ஏதேனும் செய்திகள் அல்லது கருத்துக்கள்
+                இருந்தால் எங்களை அணுகவும்.
+              </p>
+            </div>
+          </div>
+
+          {/* Main Layout: Form and Info Cards */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <ContactForm />
+
+            {/* Sidebar Info Section */}
+            <div className="lg:col-span-5 flex flex-col gap-6">
+              <SocialCard />
+
+              {/* Office Locations */}
+              <div className="grid grid-cols-1 gap-4">
+                <div className="relative h-64 overflow-hidden border border-surface-container-highest">
+                  <img
+                    alt="Modern Newsroom Interior"
+                    className="w-full h-full object-cover"
+                    src="/aathirai_logo.jpeg"
+                  />
+                  <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
+                    <p className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold uppercase">
+                      Hopton
+                    </p>
+                    <p className="font-[Inter] text-[16px] leading-[24px] font-bold">
+                      Uva, Srilanka
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-5 sm:p-8 bg-white border border-surface-container-highest flex flex-col gap-2">
+                  <h4 className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold text-primary uppercase">
+                    Direct Support
+                  </h4>
+                  <a
+                    href="mailto:newsaathirai@gmail.com"
+                    className="font-[Inter] text-[15px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-blue-900 font-bold underline-offset-4 block break-all"
+                  >
+                    newsaathirai@gmail.com
+                  </a>
+                  <p className="font-[Mukta_Malar] text-[18px] leading-[30px] text-tertiary mt-2">
+                    நேரடி உதவிக்கு மின்னஞ்சல் செய்யவும்
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
