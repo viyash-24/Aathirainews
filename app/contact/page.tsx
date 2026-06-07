@@ -14,17 +14,17 @@ export default function ContactPage() {
   return (
     <>
       <Navbar />
-      <main className="pt-32 pb-24 max-w-[1280px] mx-auto px-6">
+      <main className="pt-24 sm:pt-32 pb-12 sm:pb-24 max-w-[1280px] mx-auto px-4 sm:px-6">
         {/* Hero Section */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
           <div className="md:col-span-8">
-            <h1 className="font-['Work_Sans'] text-[48px] leading-[56px] tracking-[-0.02em] font-bold text-primary mb-4">
+            <h1 className="font-['Work_Sans'] text-[28px] sm:text-[36px] md:text-[48px] leading-[36px] sm:leading-[44px] md:leading-[56px] tracking-[-0.02em] font-bold text-primary mb-3 sm:mb-4">
               Connect With Us
             </h1>
-            <h2 className="font-[Mukta_Malar] text-[32px] leading-[44px] font-semibold mb-4">
+            <h2 className="font-[Mukta_Malar] text-[22px] sm:text-[28px] md:text-[32px] leading-[32px] sm:leading-[38px] md:leading-[44px] font-semibold mb-3 sm:mb-4">
               எங்களைத் தொடர்பு கொள்ளவும்
             </h2>
-            <p className="font-[Inter] text-[18px] leading-[28px] text-tertiary max-w-2xl">
+            <p className="font-[Inter] text-[15px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-tertiary max-w-2xl">
               Whether you have a news tip, a correction, or just want to share
               your thoughts, our editorial team is ready to listen.
               உங்களிடம் ஏதேனும் செய்திகள் அல்லது கருத்துக்கள்
@@ -59,11 +59,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="p-8 bg-white border border-surface-container-highest flex flex-col gap-2">
+              <div className="p-5 sm:p-8 bg-white border border-surface-container-highest flex flex-col gap-2">
                 <h4 className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold text-primary uppercase">
                   Direct Support
                 </h4>
-                <a href="mailto:newsaathirai@gmail.com" className="font-[Inter] text-[18px] leading-[28px] text-blue-900 font-bold  underline-offset-4 block">
+                <a href="mailto:newsaathirai@gmail.com" className="font-[Inter] text-[15px] sm:text-[18px] leading-[24px] sm:leading-[28px] text-blue-900 font-bold  underline-offset-4 block break-all">
                   newsaathirai@gmail.com
                 </a>
                 <p className="font-[Mukta_Malar] text-[18px] leading-[30px] text-tertiary mt-2">
