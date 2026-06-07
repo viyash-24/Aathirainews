@@ -47,7 +47,7 @@ export default function ContactPage() {
                 <img
                   alt="Modern Newsroom Interior"
                   className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuABvHA6cyeT0QXb6q3UwTf1DGa7hv1RldQdebwstLMPRXCZ1cPBsnqxYT6vIIqPjwO7GVt9ebuSbcglVSM5fhKB044tOJOuIDeT4J8wSZv_QtlovTUW5hqBYCgxUroM1-4g853Ir6llsHwr8GzTHhxwK_W-f-YZ05rW_C4bRxPe85hnPfP7GPNC0pLPQ4so3b374QyqekTHLf7Ico6JWM9rdlo4aRTR3EUGHqEMMRESCqzv-p8TLdefmcT93OfYlDuNeCthg_NyT18"
+                  src="/aathirai_logo.jpeg"
                 />
                 <div className="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
                   <p className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold uppercase">
@@ -63,9 +63,9 @@ export default function ContactPage() {
                 <h4 className="font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold text-primary uppercase">
                   Direct Support
                 </h4>
-                <p className="font-[Inter] text-[18px] leading-[28px] text-blue-900 font-bold underline decoration-red-700 underline-offset-4">
+                <a href="mailto:newsaathirai@gmail.com" className="font-[Inter] text-[18px] leading-[28px] text-blue-900 font-bold  underline-offset-4 block">
                   newsaathirai@gmail.com
-                </p>
+                </a>
                 <p className="font-[Mukta_Malar] text-[18px] leading-[30px] text-tertiary mt-2">
                   நேரடி உதவிக்கு மின்னஞ்சல் செய்யவும்
                 </p>
