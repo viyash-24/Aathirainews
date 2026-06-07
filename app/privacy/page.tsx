@@ -12,8 +12,8 @@ export default function PrivacyPolicyPage() {
     <>
       <Navbar />
       <main className="pt-24 pb-20 bg-background text-on-background">
-        <section className="max-w-4xl mx-auto px-6">
-          <h1 className="font-['Work_Sans'] text-[40px] md:text-[48px] leading-[48px] md:leading-[56px] tracking-[-0.02em] font-bold text-primary mb-12">
+        <section className="max-w-4xl mx-auto px-4 sm:px-6">
+          <h1 className="font-['Work_Sans'] text-[28px] sm:text-[36px] md:text-[48px] leading-[36px] sm:leading-[44px] md:leading-[56px] tracking-[-0.02em] font-bold text-primary mb-8 sm:mb-12">
             தனியுரிமைக் கொள்கை (Privacy Policy)
           </h1>
           
