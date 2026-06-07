@@ -131,6 +131,8 @@ body {
   font-family: "Inter", sans-serif;
   background: var(--color-background);
   color: var(--color-on-surface);
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 
 /* ===== Material Symbols Icon Font ===== */
@@ -184,8 +186,15 @@ body {
 /* ===== Bento Grid ===== */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
 }
 
 /* ===== Dark Mode Overrides ===== */
