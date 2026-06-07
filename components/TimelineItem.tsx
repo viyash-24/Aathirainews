@@ -11,7 +11,7 @@ export default function TimelineItem({
 }: TimelineItemProps) {
   return (
     <div className="relative">
-      <div className="absolute -left-[57px] top-2 w-4 h-4 bg-primary rounded-full border-4 border-white"></div>
+      <div className="absolute -left-[41px] sm:-left-[57px] top-2 w-4 h-4 bg-primary rounded-full border-4 border-white"></div>
       <span className="font-['Work_Sans'] text-[24px] leading-[32px] font-semibold text-primary">
         {year}
       </span>

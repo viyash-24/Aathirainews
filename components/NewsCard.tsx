@@ -46,10 +46,10 @@ export default function NewsCard({
           </span>
           <span className="text-[10px] text-slate-500">{timeAgo}</span>
         </div>
-        <h3 className="text-slate-900 dark:text-white font-[Mukta_Malar] text-[24px] leading-[32px] font-semibold group-hover:text-primary transition-colors">
+        <h3 className="text-slate-900 dark:text-white font-[Mukta_Malar] text-[20px] sm:text-[24px] leading-[28px] sm:leading-[32px] font-semibold group-hover:text-primary transition-colors break-words">
           {title}
         </h3>
-        <p className="font-[Inter] text-[14px] leading-[20px] text-slate-600 dark:text-slate-400 line-clamp-3">
+        <p className="font-[Inter] text-[14px] leading-[20px] text-slate-600 dark:text-slate-400 line-clamp-3 break-words">
           {description}
         </p>
         <Link href={`/news/${id}`} className="self-start mt-2 border border-blue-900 text-blue-900 dark:border-blue-400 dark:text-blue-400 font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold py-2 px-4 hover:bg-blue-900 hover:text-white dark:hover:bg-blue-400 dark:hover:text-slate-900 transition-colors uppercase">

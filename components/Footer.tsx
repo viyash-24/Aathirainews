@@ -10,9 +10,9 @@ const footerLinks = [
 export default function Footer() {
   return (
     <footer className="w-full bg-white dark:bg-slate-950 border-t border-gray-200 dark:border-gray-800">
-      <div className="max-w-[1280px] mx-auto py-12 px-6 flex flex-col items-center gap-6 text-center">
+      <div className="max-w-[1280px] mx-auto py-8 sm:py-12 px-4 sm:px-6 flex flex-col items-center gap-6 text-center">
         <div className="flex flex-col md:flex-row justify-between w-full items-center gap-8">
-          <div className="text-left">
+          <div className="text-center md:text-left">
             <Link
               href="/"
               className="font-black text-blue-900 dark:text-blue-100 text-3xl tracking-tighter"
@@ -23,7 +23,7 @@ export default function Footer() {
               Journalistic Integrity &amp; Modern Sophistication
             </p>
           </div>
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-8">
             {footerLinks.map((link) => (
               <Link
                 key={link.label}

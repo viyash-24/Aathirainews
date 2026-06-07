@@ -55,7 +55,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="lg:col-span-7 bg-white p-10 border border-surface-container-highest shadow-sm">
+    <section className="lg:col-span-7 bg-white p-5 sm:p-8 md:p-10 border border-surface-container-highest shadow-sm">
       {submitted && (
         <div className="mb-6 bg-emerald-50 border border-emerald-200 text-emerald-700 p-4 font-[Inter] text-[14px] leading-[20px]">
           ✅ Message sent successfully! We&apos;ll get back to you soon.
@@ -138,7 +138,7 @@ export default function ContactForm() {
         </div>
 
         <button
-          className="bg-blue-900 text-white py-4 px-8 font-['Work_Sans'] text-[24px] leading-[32px] font-semibold uppercase tracking-widest hover:bg-primary transition-colors duration-300 transform active:scale-95 self-start"
+          className="bg-blue-900 text-white py-3 px-6 sm:py-4 sm:px-8 font-['Work_Sans'] text-[16px] sm:text-[20px] md:text-[24px] leading-[24px] sm:leading-[28px] md:leading-[32px] font-semibold uppercase tracking-widest hover:bg-primary transition-colors duration-300 transform active:scale-95 self-start"
           type="submit"
         >
           Send Message

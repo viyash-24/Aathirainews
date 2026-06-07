@@ -62,21 +62,21 @@ export default function AboutPage() {
       <main className="pt-24 pb-20">
         {/* Hero Section */}
         <section className="max-w-[1280px] mx-auto px-6 mb-16">
-          <div className="relative w-full h-[500px] overflow-hidden rounded-xl">
+          <div className="relative w-full h-[250px] sm:h-[350px] md:h-[500px] overflow-hidden rounded-xl">
             <img
               alt="Newsroom atmosphere"
               className="w-full h-full object-cover"
               src="/aathirai_logo.jpeg"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-12">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6 sm:p-8 md:p-12">
               <div className="max-w-3xl">
                 <span className="bg-primary text-white font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold px-4 py-1 mb-4 inline-block uppercase tracking-widest">
                   Our Legacy
                 </span>
-                <h1 className="font-['Work_Sans'] text-[48px] leading-[56px] tracking-[-0.02em] font-bold text-white mb-4">
+                <h1 className="font-['Work_Sans'] text-[28px] sm:text-[36px] md:text-[48px] leading-[34px] sm:leading-[44px] md:leading-[56px] tracking-[-0.02em] font-bold text-white mb-2 sm:mb-4">
                   Integrity in Every Ink, Precision in Every Pixel.
                 </h1>
-                <p className="font-[Mukta_Malar] text-[32px] leading-[44px] font-semibold text-white leading-tight">
+                <p className="font-[Mukta_Malar] text-[20px] sm:text-[26px] md:text-[32px] leading-[28px] sm:leading-[36px] md:leading-[44px] font-semibold text-white">
                   உண்மை, நேர்மை, வேகம் - ஆதிரை செய்திகளின் அடையாளம்.
                 </p>
               </div>
@@ -85,14 +85,14 @@ export default function AboutPage() {
         </section>
 
         {/* Mission & Philosophy Bento Grid */}
-        <section className="max-w-[1280px] mx-auto px-6 mb-24">
+        <section className="max-w-[1280px] mx-auto px-4 sm:px-6 mb-12 sm:mb-24">
           <div className="bento-grid">
             {/* Mission Box */}
-            <div className="col-span-12 md:col-span-7 bg-white p-10 border border-surface-container-highest flex flex-col justify-center">
-              <h2 className="font-['Work_Sans'] text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-primary mb-6">
+            <div className="col-span-12 md:col-span-7 bg-white p-6 sm:p-10 border border-surface-container-highest flex flex-col justify-center">
+              <h2 className="font-['Work_Sans'] text-[24px] sm:text-[32px] leading-[32px] sm:leading-[40px] tracking-[-0.01em] font-bold text-primary mb-4 sm:mb-6">
                 Our Mission
               </h2>
-              <p className="font-[Inter] text-[18px] leading-[28px] text-tertiary mb-6 leading-relaxed">
+              <p className="font-[Inter] text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-tertiary mb-4 sm:mb-6">
                 AathiraiNews was founded with a singular purpose: to deliver
                 unfiltered, accurate, and rapid news to the Tamil-speaking
                 global community. In an era of misinformation, we serve as the
@@ -109,7 +109,7 @@ export default function AboutPage() {
             </div>
 
             {/* History Image */}
-            <div className="col-span-12 md:col-span-5 h-[400px] md:h-auto rounded-xl overflow-hidden relative border border-surface-container-highest">
+            <div className="col-span-12 md:col-span-5 h-[250px] sm:h-[300px] md:h-auto rounded-xl overflow-hidden relative border border-surface-container-highest">
               <img
                 alt="Printing press"
                 className="w-full h-full object-cover"
@@ -127,7 +127,7 @@ export default function AboutPage() {
         {/* History Timeline */}
         <section className="bg-surface-container-lowest py-24">
           <div className="max-w-[1280px] mx-auto px-6">
-            <div className="flex flex-col md:flex-row gap-16">
+            <div className="flex flex-col md:flex-row gap-8 md:gap-16">
               <div className="md:w-1/3">
                 <h2 className="font-['Work_Sans'] text-[32px] leading-[40px] tracking-[-0.01em] font-bold text-blue-900 mb-4 sticky top-24">
                   The Journey So Far
@@ -136,7 +136,7 @@ export default function AboutPage() {
                   எங்கள் வளர்ச்சி - ஓர் வரலாற்றுப் பார்வை.
                 </p>
               </div>
-              <div className="md:w-2/3 border-l-2 border-outline-variant pl-12 space-y-16">
+              <div className="md:w-2/3 border-l-2 border-outline-variant pl-8 sm:pl-12 space-y-10 sm:space-y-16">
                 {timelineData.map((item, index) => (
                   <TimelineItem key={index} {...item} />
                 ))}
@@ -147,12 +147,12 @@ export default function AboutPage() {
 
         {/* Bilingual CTA */}
         <section className="max-w-[1280px] mx-auto px-6 mt-24">
-          <div className="bg-blue-900 text-white rounded-xl p-12 text-center overflow-hidden relative">
+          <div className="bg-blue-900 text-white rounded-xl p-6 sm:p-8 md:p-12 text-center overflow-hidden relative">
             <div className="relative z-10">
-              <h2 className="font-['Work_Sans'] text-[32px] leading-[40px] tracking-[-0.01em] font-bold mb-4">
+              <h2 className="font-['Work_Sans'] text-[24px] sm:text-[32px] leading-[32px] sm:leading-[40px] tracking-[-0.01em] font-bold mb-4">
                 Be Part of the Truth
               </h2>
-              <h3 className="font-[Mukta_Malar] text-[32px] leading-[44px] font-semibold mb-8">
+              <h3 className="font-[Mukta_Malar] text-[22px] sm:text-[28px] md:text-[32px] leading-[32px] sm:leading-[38px] md:leading-[44px] font-semibold mb-6 sm:mb-8">
                 உண்மையின் குரலாய் எங்களுடன் இணையுங்கள்
               </h3>
               <div className="flex flex-col sm:flex-row justify-center gap-4">

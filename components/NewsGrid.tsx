@@ -42,11 +42,12 @@ export default function NewsGrid({ initialArticles = [], initialCategories = [] 
   const categoryNames = ["ALL", ...categories.map(c => c.name)];
 
   return (
-    <section className="max-w-[1280px] mx-auto px-6 py-8">
-      <div className="flex items-center justify-between mb-8 border-b-4 border-primary pb-2">
-        <h2 className="font-['Work_Sans'] text-[32px] leading-[40px] tracking-[-0.01em] font-bold flex items-center gap-3">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 border-b-4 border-primary pb-2 gap-3">
+        <h2 className="font-['Work_Sans'] text-[20px] sm:text-[24px] md:text-[32px] leading-[28px] sm:leading-[32px] md:leading-[40px] tracking-[-0.01em] font-bold flex items-center gap-3">
           <span className="material-symbols-outlined text-primary">newspaper</span>
-          சமீபத்திய செய்திகள் | RECENT NEWS
+          <span className="hidden sm:inline">சமீபத்திய செய்திகள் | RECENT NEWS</span>
+          <span className="sm:hidden">RECENT NEWS</span>
         </h2>
         <div className="hidden sm:flex gap-2 flex-wrap justify-end">
           {categoryNames.map((cat) => (
