@@ -45,7 +45,7 @@ export default async function HeroSection() {
 
   /* ── Live hero ───────────────────────────────────────────────── */
   return (
-    <section className="max-w-[1280px] mx-auto px-6 py-4">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-4">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Main Feature */}
         <div className="lg:col-span-8 relative group overflow-hidden border border-outline-variant bg-white dark:bg-slate-900">
@@ -68,23 +68,23 @@ export default async function HeroSection() {
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
           </div>
-          <div className="absolute bottom-0 left-0 p-8 text-white">
+          <div className="absolute bottom-0 left-0 p-4 sm:p-6 md:p-8 text-white">
             <span className="inline-block bg-primary text-white font-[Inter] text-[12px] leading-[16px] tracking-[0.05em] font-bold px-3 py-1 mb-3 uppercase">
               {hero.category}
             </span>
-            <h1 className="font-[Mukta_Malar] text-[40px] leading-[52px] tracking-[-0.02em] font-bold mb-4 line-clamp-3">
+            <h1 className="font-[Mukta_Malar] text-[22px] sm:text-[30px] md:text-[40px] leading-[30px] sm:leading-[40px] md:leading-[52px] tracking-[-0.02em] font-bold mb-2 sm:mb-4 line-clamp-3">
               {hero.titleTa || hero.titleEn}
             </h1>
             <p
               className={`${
                 hero.newsLanguage === "tamil" ? "font-[Mukta_Malar]" : "font-[Inter]"
-              } text-[16px] leading-[26px] text-slate-200 line-clamp-2 max-w-2xl mb-6`}
+              } text-[14px] sm:text-[16px] leading-[22px] sm:leading-[26px] text-slate-200 line-clamp-2 max-w-2xl mb-3 sm:mb-6 hidden sm:block`}
             >
               {(heroSnippetBase || hero.titleEn).slice(0, 140) +
                 ((heroSnippetBase || hero.titleEn).length > 140 ? "…" : "")}
             </p>
             <div className="flex items-center gap-4">
-              <Link href={`/news/${hero._id}`} className="bg-primary hover:bg-red-800 text-white font-bold py-3 px-8 text-sm uppercase tracking-widest transition-colors flex items-center gap-2">
+              <Link href={`/news/${hero._id}`} className="bg-primary hover:bg-red-800 text-white font-bold py-2 px-4 sm:py-3 sm:px-8 text-xs sm:text-sm uppercase tracking-widest transition-colors flex items-center gap-2">
                 வாசிக்க | READ MORE{" "}
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>
@@ -123,7 +123,7 @@ export default async function HeroSection() {
                   <span className="font-[Inter] text-[10px] font-bold text-primary uppercase tracking-wider">
                     {article.category}
                   </span>
-                  <h3 className="text-slate-900 dark:text-white dark:group-hover:text-slate-900 font-[Mukta_Malar] text-[15px] leading-[22px] font-bold mt-1 line-clamp-3">
+                  <h3 className="text-slate-900 dark:text-white dark:group-hover:text-slate-900 font-[Mukta_Malar] text-[15px] leading-[22px] font-bold mt-1 line-clamp-3 break-words">
                     {article.titleTa || article.titleEn}
                   </h3>
                   <p className="text-xs text-slate-400 mt-1">{timeAgo(article.createdAt)}</p>

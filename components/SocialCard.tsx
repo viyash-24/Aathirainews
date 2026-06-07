@@ -34,7 +34,7 @@ const socialLinks: SocialLink[] = [
 
 export default function SocialCard() {
   return (
-    <div className="bg-surface-container-low p-8 border border-surface-container-highest rounded-2xl shadow-sm">
+    <div className="bg-surface-container-low p-5 sm:p-8 border border-surface-container-highest rounded-2xl shadow-sm">
       
       {/* Title */}
       <h3 className="font-['Work_Sans'] text-[22px] font-semibold mb-6 text-blue-900 uppercase">
